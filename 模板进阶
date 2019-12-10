@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+
+//template <class T, size_t len>
+//class Array
+//{
+//private:
+//	T arr[N];//栈
+//};
+
+//模板的特化
+/*条件1：基础模板
+2.template<>
+3.格式一致
+解决通用模板处理有问题的数据类型
+*/
+template <class T>
+bool cmp(T& a, T& b)
+{
+	return a > b;
+}
+template<>
+bool cmp<char*>(char*& a, char*& b)
+{
+	if (strcmp(a,b) > 0)
+	{
+		return true;
+	}
+	return false;
+}
+
+
+//类模板特化
+template <class T1, class T2>
+class A<T1* , T2*>
+{
+public:
+
+private:
+	T1 a;
+	T2 b;
+};
+//全特化
+
+//偏特化
+//部分特化
+template <class T1>
+class A<T1, int>
+{
+public:
+private:
+	T1 a;
+};
+
+template<class T>
+void Copy(T* dest, T* src, size_t sz)
+{}
+
+int main()
+{
+//	Array<int, 20>arr;
+	return 0;
+}
+/*
+	编译时确定类型，运行时o(1)
+	模板特化：
+		1.定义两个类型：turetype  ,  falsetype ---->分流
+		2.typetraits:通用类的模板 ， isPodType---->falsetype
+					 内置类型转换 ， isPodYtpe---->truetype
+		3.实例化： 内置类型---》转化
+					自定义类型----
+*/
