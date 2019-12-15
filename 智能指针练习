@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+template<class T>
+class SmartPtr
+{
+public:
+	SmartPtr(T* = nullptr)
+		:_ptr(ptr)
+	{}
+
+	~SmartPtr()
+	{
+		if (_ptr)
+		{
+			delete _ptr;
+		}
+	}
+
+	T& operator*()
+	{
+		return *_ptr;
+	}
+
+	T* operator->()
+	{
+		return _ptr;
+	}
+private:
+	T* _ptr;
+};
+
+//int main()
+//{
+//	SmartPtr<int>sp1(new int);
+//	SmartPtr<int>sp2(sp1);//只能指针的深浅拷贝！！！！！，，它这个也不能写深拷贝，因为这么做只是为了使两个指针共同管理同一片空间的资源，
+//	//如果写深拷贝就不是共同管理同一个资源了，而是两个指针分别管理两块相同大小的空间资源，就违背这么做的的原理
+//	int* p1 = new int;
+//	int*p2 = p1;
+//
+//	/**sp1 = 10;
+//	cout << *sp1<<endl;*/
+//	return 0;
+//}
