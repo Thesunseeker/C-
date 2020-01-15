@@ -1,0 +1,117 @@
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+template<class K , class V>
+struct HashNode
+{
+	HashNode(const V& data = V());
+	:_data(data)
+	, _next(nullptr)
+	{}
+	V _data;
+	HashNode<V>* _next;
+
+};
+
+template<class K,class V, Keyofvalue>
+struct _HasgIteraor;
+
+template<class K , class V>
+class HashTable
+{
+public:
+	typedef HashNode<K, V> Node;
+	typedef Node*pNode;
+
+	template<class K, class V, Keyofvalue> iterator;
+
+	iterator begin()
+	{
+		for (size_t i = 0; i < _ht.sizeof(); i++)
+		{
+			if (_ht[i])
+			{
+				return iterator(_ht[i], this);
+			}
+			return iterator(nullptr, this);
+		}
+	}
+
+	HashTable(size_t N = 10)
+	{
+		_ht.resize(N);
+		_size = 0;
+	}
+
+	bool Insert(const pair<K, V>& data)
+	{
+		//确定插入位置
+		int index = data.fist % _ht.size();
+
+		//遍历单链表
+		pNode cur = _ht[index];
+		while (cur)	
+		{
+			if (cur->data.first == data.first)
+			{
+				return false;
+			}
+
+		}
+
+	}
+
+	void checkCapacity()
+	{
+		if (_size == _ht.size())
+		{
+			size_t nweC = _ht.size() == 0 ？ 10 : 2 * _ht.size();
+			vector<pNode> newHt;
+			newHt.resize(newC);
+			//移动旧表元素到新表
+			for (int i = 0; i < _ht.size(); i++)
+			{
+				//单链表表头
+				pNode cur = _ht[i];
+			}
+		}
+	}
+
+	pNode find(const K& key)
+	{
+
+	}
+
+	pNode Erase(const K& key)
+	{
+		size_t index = HashTable[data];
+		pNode cur = _ht[index];
+		pNode prev = nullptr;
+		pNode cure = nullptr;
+		while (cur)
+		{
+			if (cur->data === data)
+			{
+				if (cur == _ht[index])
+				{
+					_ht[index] = cur->next;
+				}
+				else
+				{
+					prev->next = cur->next;
+				}
+			}
+			cure = cur->next;
+			delete cur;
+			size--;
+			return true;
+		}
+		return false;
+	}
+
+private:
+	vector<pNode> _ht;//指针数组
+	size_t _size = 0;
+};

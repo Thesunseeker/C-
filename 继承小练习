@@ -1,0 +1,67 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+
+class A
+{
+public:
+	A(int a)
+		:_a(a)
+	{}
+private:
+	int _a;
+};
+
+class Presson
+{
+public:
+    void fun(){
+		cout << "name:" << _name << endl;
+		cout << "age:" << _age << endl;
+	};
+protected:
+	int _age = 18; 
+	string _name = "wang";
+private:
+	int _a;
+};
+
+class Student : public Presson
+{
+public:
+	void fun()
+	{
+		//cout << name << endl;
+	}
+	void printf()
+	{
+	//	cout << "name:"
+	}
+private:
+	int _id = 118;
+};
+
+//int main()
+//{
+//	int a = 10;
+//	double d = a;//隐式转换
+//	A a = 10;//单参构造隐式类型转换
+//
+//	int* pi = (int*)a;//强制类型转换
+//
+//	Presson p;
+//	Student s;
+//	p = s; //切片
+//	Presson p = s;
+//	Presson *ps = &s;
+//	Presson& rs = s;
+//
+//	Presson pp;
+//	//Student ss = pp;//父类不可赋值给子类对象
+//
+//	Student* sp = (Student*)&pp; //存在访问越界   父类指针强转为子类指针
+//	sp = (Student*)ps;   //是安全的，ps本身指向的为子类对象
+//	//Student s;
+//	//return 0; 
+//}
