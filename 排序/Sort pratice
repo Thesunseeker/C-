@@ -1,0 +1,130 @@
+#include <iostream>
+using namespace std;
+
+void Insertsort(int a[],int n)
+{
+  for(int i = 0 ; i < n ; i++)
+  {
+    int key = a[i];
+    int j;
+    for(j  = i - 1; j >= 0 && a[j] > key; j--)
+    {
+      a[j+1] = a[j];
+    }
+    a[j+1] = key;
+  }
+}
+
+void InsertsortShell(int a[] , int size , int gap)
+{
+  for(int i = gap ; i < size ; i++)
+  {
+    int key = a[i];
+    int j;
+    for(j = i - gap; j >= 0 && a[j] > key ; j -= gap)
+    {
+      a[j + gap] = a[j];
+    }
+    a[j + gap] = key;
+  }
+}
+
+void ShellSort(int a[] , int size)
+{
+  int gap = size;
+  while(1)
+  {
+    gap = gap / 3 + 1;
+    InsertsortShell(a ,size, gap);
+    if(gap == 1)
+    {
+      break;
+    }
+  }
+}
+
+void Swap(int a[] , int i , int j)
+{
+  int tmp = a[i];
+  a[i] = a[j];
+  a[j] = tmp;
+}
+
+void SelectSort(int a[], int size)
+{
+ for(int i = 0 ; i < size ; i ++)
+ {
+   int maxid = 0;
+   for(int j = 0; j <= size - i- 1 ; j++)
+   {
+     if(a[j] > a[maxid])
+       maxid = j;
+   }
+   Swap(a,maxid,size - 1 - i);
+ }
+}
+
+void HeapAdjust(int a[],int size , int index)
+{
+  int left = 2*index + 1;
+  int right = 2*index + 2;
+  if(left >= size)
+    return;
+  int max = left;
+  if(right < size && a[right] > a[left])
+    max = right;
+  if(a[index] >= a[max])
+    return;
+  Swap(a,max,index);
+
+  HeapAdjust(a,size,max);
+}
+
+void CreatHeap(int a[], int size)
+{
+  //从最后一个非叶子节点, 一直到0 , 不断向下调整
+  for(int i = (size - 2)/2; i >=0 ; i--)
+  {
+    HeapAdjust(a,size,i);
+  }
+}
+
+void HeapSort(int a[] , int size)
+{
+  //建大堆
+  CreatHeap(a,size);
+  for(int i = 0; i < size ; i++)
+  {
+    Swap(a,0,size - 1 - i);
+    HeapAdjust(a,size - 1 - i , 0);
+  }
+}
+
+void BubbleSort(int a[],int size)
+{
+  for(int i = 0 ; i < size ; i++)
+  {
+    int flag = 1;
+    for(int j = 0 ; j < size - 1 - i; j++)
+    {
+      if(a[j] > a[j+1])
+      {     
+        Swap(a,j,j+1);
+        flag = 0;
+      }  
+    }
+    if(flag == 1)
+      break;
+  }
+}
+
+int main()
+{
+  int array[] = {5,11,4,2,6,99,44,22,3,11};
+  int size = sizeof(array)/sizeof(int);
+  BubbleSort(array,size);
+  for(int i = 0; i < size ; i++)
+  {
+    printf("%d\n",array[i]);
+  }
+}
